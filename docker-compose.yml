@@ -1,0 +1,33 @@
+version: '2'
+
+# Persistencia dos dados
+volumes:
+  agenda-contatos-mysql-data:
+    driver: local
+
+services:
+  # MySQL (5.7)
+  mysql:
+    image: mysql:5.7
+    container_name: agenda-contatos-mysql
+    volumes:
+      # Docker VM : Docker Container
+      - agenda-contatos-mysql-data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=agenda
+      - MYSQL_USER=homestead
+      - MYSQL_PASSWORD=secret
+
+  # PHP (with Caddy)
+  app:
+    image: ambientum/php:7.1-caddy
+    container_name: agenda-contatos-app
+    volumes:
+      - .:/var/www/app
+    ports:
+      - "8080:8080"
+    links:
+      - mysql
