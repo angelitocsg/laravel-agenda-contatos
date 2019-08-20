@@ -7,3 +7,9 @@ Playlist no Youtube: https://www.youtube.com/playlist?list=PLitmYOL92_BWyr6XAY54
 ## Configuração ##
 
 Efetuar configurações necessárias no arquivo .env na raiz do projeto.
+
+### Docker
+
+Se utilizar o `docker-compose`, após iniciar o container da aplicação, executar o comando `php artisan migrate`.
+
+`docker exec -it agenda-contatos-app php artisan migrate`
